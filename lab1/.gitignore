@@ -1,0 +1,27 @@
+# Lab 1 Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python Bytecode & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Local NLP Data / Model Caches
+nltk_data/
+.spacy_cache/
+downloads/
+temp/
+%temp%/
+
+# OS / Editor Metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

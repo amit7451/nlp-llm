@@ -1,10 +1,24 @@
 # Lab 1: Foundations of Natural Language Processing & Large Language Models
 
-A rigorous, end-to-end pedagogical laboratory notebook covering the essential mathematical foundations and practical implementations of modern Natural Language Processing (NLP) leading up to Large Language Models (LLMs).
+A complete, self-contained laboratory module covering the mathematical foundations, classical feature engineering, modern tokenizers from scratch, static and contextual embeddings, statistical language modeling, and evaluation metrics.
 
 ---
 
-## 📚 Laboratory Syllabus & Core Modules
+## 📂 Laboratory Structure
+
+```
+lab1/
+├── .gitignore          # Lab 1 specific ignore rules (.venv, checkpoints, caches)
+├── lab1.ipynb          # Verified end-to-end laboratory notebook (theory + runnable code)
+├── requirements.txt    # Standalone dependencies for Lab 1
+├── setup_env.bat       # One-click Windows setup script
+├── setup_env.sh        # One-click Linux / macOS setup script
+└── README.md           # Lab 1 documentation & syllabus
+```
+
+---
+
+## 📚 Laboratory Syllabus & Modules
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -64,77 +78,69 @@ A rigorous, end-to-end pedagogical laboratory notebook covering the essential ma
 
 ---
 
-## 🛠️ Environment Setup & Installation
+## 🛠️ Independent Environment Setup
 
-### Option 1: Using the Shared Workspace Virtual Environment
+Each lab in this repository is completely isolated. To set up and run Lab 1:
 
-From the root directory `nlp_llm`:
+### Quick Setup (One-Click)
 
-```bash
-# Windows (PowerShell)
-.\.venv\Scripts\Activate.ps1
+- **Windows**: Double-click or run `setup_env.bat`
+- **Linux / macOS**: Run `./setup_env.sh` (or `bash setup_env.sh`)
 
-# Linux / macOS
-source .venv/bin/activate
-```
+### Manual Setup
 
-### Option 2: Standalone Isolated Lab Environment
+1. **Open terminal in `lab1/`**:
+   ```bash
+   cd lab1
+   ```
 
-If you prefer to maintain a dedicated environment specifically for Lab 1:
+2. **Create isolated virtual environment**:
+   ```bash
+   python -m venv .venv
+   ```
 
-```bash
-# Navigate to lab1 folder
-cd lab1
+3. **Activate environment**:
+   ```bash
+   # Windows (PowerShell)
+   .\.venv\Scripts\Activate.ps1
 
-# Create isolated virtual environment
-python -m venv .venv
+   # Windows (Command Prompt)
+   .\.venv\Scripts\activate.bat
 
-# Activate environment
-# On Windows (PowerShell):
-.\.venv\Scripts\Activate.ps1
-# On Linux / macOS:
-source .venv/bin/activate
+   # Linux / macOS
+   source .venv/bin/activate
+   ```
 
-# Install lab dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
+4. **Install dependencies**:
+   ```bash
+   python -m pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
 
-# Download NLP models (automatically downloaded on first notebook run as well)
-python -m spacy download en_core_web_sm
-```
+5. **Download spaCy language model & register kernel**:
+   ```bash
+   python -m spacy download en_core_web_sm
+   python -m ipykernel install --user --name nlp-llm-lab1 --display-name "Python (NLP-LLM Lab 1)"
+   ```
 
 ---
 
 ## 🚀 Running the Notebook
 
-1. **Launch Jupyter Notebook / JupyterLab**:
-   ```bash
-   jupyter notebook lab1.ipynb
-   ```
-2. **Register the Environment Kernel (Optional)**:
-   ```bash
-   python -m ipykernel install --user --name nlp-llm-lab1 --display-name "Python (NLP Lab 1)"
-   ```
-3. Open `lab1.ipynb` in your browser or IDE (VS Code, Cursor, Antigravity) and select the `Python (NLP Lab 1)` or `.venv` kernel.
+```bash
+jupyter notebook lab1.ipynb
+```
+Select the **`Python (NLP-LLM Lab 1)`** kernel or the local **`lab1/.venv`** interpreter in your IDE.
 
 ---
 
-## 📦 File Inventory
-
-| File | Description |
-|---|---|
-| [`lab1.ipynb`](./lab1.ipynb) | Complete laboratory notebook with theory, formulas, diagrams, and runnable code |
-| [`requirements.txt`](./requirements.txt) | Pinpoint dependencies for all NLP & ML packages used in Lab 1 |
-| [`README.md`](./README.md) | Laboratory guide and conceptual documentation |
-
----
-
-## 🔬 Key Libraries Used
+## 🔬 Core Dependencies
 
 - **`nltk`** (v3.8+): Tokenization, POS tagging, WordNet lemmatizer, Porter stemmer, BLEU metric, CFG chart parser.
 - **`scikit-learn`** (v1.3+): CountVectorizer (BoW), TfidfVectorizer, classification metrics (Precision, Recall, F1).
 - **`gensim`** (v4.3+): Word2Vec (CBOW, Skip-Gram) and FastText subword embeddings.
 - **`sentencepiece`** (v0.2+): Unigram language model and BPE tokenizer framework.
-- **`spacy`** (v3.7+): Pretrained statistical & transformer NLP pipelines (`en_core_web_sm`), named entity recognition and displaCy visualization.
+- **`spacy`** (v3.7+): Pretrained NLP pipelines (`en_core_web_sm`), named entity recognition and displaCy visualization.
 - **`rouge-score`** (v0.1.2+): ROUGE-1, ROUGE-2, ROUGE-L summarization overlap evaluation.
 - **`numpy` & `pandas`**: Vector computations, cosine similarity, transition probability matrices, structured displays.
+- **`ipykernel` & `jupyter`**: Interactive notebook runtime and execution kernel.
