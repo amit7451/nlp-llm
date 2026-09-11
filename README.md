@@ -11,37 +11,32 @@ An end-to-end, rigorous, hands-on repository for mastering **Natural Language Pr
 
 ---
 
-## 🏛️ Modular Repository Architecture
+## 🏛️ Unified Repository Architecture
 
-To maintain strict isolation, reproducibility, and prevent dependency version conflicts across diverse machine learning toolchains, **every laboratory in this repository is completely self-contained**:
+To provide a consistent, high-performance, and reproducible machine learning environment across all laboratories, this repository utilizes a **unified global virtual environment** (`.venv`) at the repository root:
 
 ```
 nlp_llm/
 │
-├── .gitignore                  # Global ignore rules (covers all lab sub-environments)
-├── README.md                   # Global NLP & LLM guide, curriculum & lab summaries
+├── .venv/                      # Unified project-wide virtual environment
+├── requirements.txt            # Master NLP & LLM dependencies
+├── setup_env.bat               # Windows one-click environment setup
+├── setup_env.sh                # Linux/macOS one-click environment setup
+├── .gitignore                  # Global ignore rules
+├── README.md                   # Master NLP & LLM guide, curriculum & lab summaries
 │
-├── lab1/                       # Lab 1: Foundations of NLP & LLMs
-│   ├── .gitignore              # Lab 1 isolated ignore rules
-│   ├── lab1.ipynb              # Complete, executed laboratory notebook
-│   ├── requirements.txt        # Dedicated dependencies for Lab 1
-│   ├── setup_env.bat           # Windows one-click environment setup
-│   ├── setup_env.sh            # Linux/macOS one-click environment setup
+├── lab1/                       # Lab 1: Foundations of NLP & Language Modeling
+│   ├── lab1.ipynb              # Executed laboratory notebook
 │   └── README.md               # Detailed Lab 1 syllabus & theoretical guide
 │
-├── lab2/                       # Lab 2: Transformers from Scratch (Planned)
-│   ├── .gitignore
-│   ├── requirements.txt
-│   └── ...
+├── lab2/                       # Lab 2: Word Embeddings & Vector Spaces (Word2Vec & GloVe)
+│   ├── lab2.ipynb              # Comprehensive Word2Vec & GloVe notebook
+│   └── README.md               # Lab 2 theoretical foundations & guide
 │
-└── labX/                       # Future labs (Autonomous & Self-Contained)
+└── labX/                       # Future labs (Transformers, Pretraining, PEFT/LoRA, RAG, RLHF)
 ```
 
-Each lab directory maintains:
-- Its own isolated virtual environment (`labX/.venv/`).
-- Its own pinned dependencies (`requirements.txt`).
-- Its own local `.gitignore` and OS setup automation scripts (`setup_env.bat` / `setup_env.sh`).
-- Its own comprehensive theoretical documentation and syllabus (`README.md`).
+A single shared Jupyter kernel (**`Python (NLP-LLM)`**) is registered globally, powering all notebooks without redundant packages or duplicate multi-gigabyte environments.
 
 ---
 
@@ -119,9 +114,16 @@ Each lab directory maintains:
 
 ---
 
-### 📖 [Lab 2: Transformer Architecture from Scratch](./lab2)
-- **Status**: 🚧 *Upcoming*
-- **Focus Areas**: Scaled dot-product attention, multi-head attention mechanisms, sinusoidal & rotary positional embeddings (RoPE), feed-forward sublayers, pre-LN vs post-LN residual connections, causal masking for autoregressive decoders.
+### 📖 [Lab 2: Word Embeddings & Vector Spaces (Word2Vec & GloVe)](./lab2)
+- **Status**: ✅ **Complete & Verified**
+- **Core Topics**:
+  1. **Corpus Preprocessing with NLTK**: Sentence tokenization, lowercase normalization, stopword filtering, and semantic domain structuring.
+  2. **Word2Vec Deep Dive (Gensim)**: Continuous Bag-of-Words (CBOW) vs. Skip-gram with Negative Sampling (SGNS); semantic similarity; vector analogies ($\vec{v}_{\text{king}} - \vec{v}_{\text{man}} + \vec{v}_{\text{woman}} \approx \vec{v}_{\text{queen}}$).
+  3. **GloVe from First Principles**: Distance-weighted co-occurrence matrix $X$, power-law weighting function $f(X)$, and custom gradient descent optimization on the weighted least-squares loss.
+  4. **Matrix Factorization with Scikit-Learn**: Positive Pointwise Mutual Information (PPMI) and TruncatedSVD for count-based distributed representations.
+  5. **Comparative Analysis & 2D Visualization**: Cosine similarity benchmarking (`sklearn.metrics.pairwise.cosine_similarity`) and PCA projection (`sklearn.decomposition.PCA` + `matplotlib`).
+- **Notebook**: [`lab2/lab2.ipynb`](./lab2/lab2.ipynb)
+- **Guide**: [`lab2/README.md`](./lab2/README.md)
 
 ---
 
@@ -149,45 +151,40 @@ Each lab directory maintains:
 
 ---
 
-## ⚡ Quickstart: Working with Any Lab
+## ⚡ Quickstart: Global Environment Setup
 
-Each lab is standalone. To work on any lab (e.g. `lab1`):
+The entire repository runs from the root virtual environment:
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/amit7451/nlp-llm.git
 cd nlp-llm
 
-# 2. Enter the target lab directory
-cd lab1
-
-# 3. Quick setup (Windows)
+# 2. Automated setup (Windows)
 .\setup_env.bat
 
-# Or Quick setup (Linux / macOS)
+# Or Automated setup (Linux / macOS)
 ./setup_env.sh
 ```
 
-### Manual Setup for Any Lab
+### Manual Setup
 
 ```bash
-cd lab1
+# Create & activate environment
 python -m venv .venv
+.\.venv\Scripts\activate       # Windows PowerShell: .\.venv\Scripts\Activate.ps1
+# source .venv/bin/activate    # Linux / macOS
 
-# Activate:
-# Windows (PowerShell):
-.\.venv\Scripts\Activate.ps1
-# Linux / macOS:
-source .venv/bin/activate
-
-# Install requirements & register kernel
+# Install requirements & register global kernel
 pip install --upgrade pip
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
-python -m ipykernel install --user --name nlp-llm-lab1 --display-name "Python (NLP-LLM Lab 1)"
+python -m ipykernel install --user --name nlp-llm --display-name "Python (NLP-LLM)"
 
-# Run Notebook
-jupyter notebook lab1.ipynb
+# Launch any laboratory notebook
+jupyter notebook lab1/lab1.ipynb
+# or
+jupyter notebook lab2/lab2.ipynb
 ```
 
 ---

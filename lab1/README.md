@@ -8,13 +8,14 @@ A complete, self-contained laboratory module covering the mathematical foundatio
 
 ```
 lab1/
-├── .gitignore          # Lab 1 specific ignore rules (.venv, checkpoints, caches)
 ├── lab1.ipynb          # Verified end-to-end laboratory notebook (theory + runnable code)
-├── requirements.txt    # Standalone dependencies for Lab 1
-├── setup_env.bat       # One-click Windows setup script
-├── setup_env.sh        # One-click Linux / macOS setup script
+├── requirements.txt    # References master requirements
+├── setup_env.bat       # Delegates to global setup script
+├── setup_env.sh        # Delegates to global setup script
 └── README.md           # Lab 1 documentation & syllabus
 ```
+
+> **Note**: This laboratory runs using the unified global virtual environment located at the root of the repository (`nlp_llm/.venv`).
 
 ---
 
@@ -127,10 +128,16 @@ Each lab in this repository is completely isolated. To set up and run Lab 1:
 
 ## 🚀 Running the Notebook
 
+Activate the project-wide environment and launch the notebook:
+
 ```bash
-jupyter notebook lab1.ipynb
+# From repository root:
+.\.venv\Scripts\activate       # Windows
+# or source .venv/bin/activate # Linux/macOS
+
+jupyter notebook lab1/lab1.ipynb
 ```
-Select the **`Python (NLP-LLM Lab 1)`** kernel or the local **`lab1/.venv`** interpreter in your IDE.
+Select the **`Python (NLP-LLM)`** kernel in the notebook interface.
 
 ---
 
