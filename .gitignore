@@ -67,6 +67,7 @@ sdist/
 var/
 wheels/
 *.egg-info/
+*.zip
 
 # Unit test & coverage
 htmlcov/
