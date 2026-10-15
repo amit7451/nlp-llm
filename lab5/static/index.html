@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sportix AI - Elite Sports Domain Chatbot with Strict Guardrails">
+  <title>Sportix AI — Sports Intelligence Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <!-- Atmospheric Stadium Lighting Effects -->
+  <div class="stadium-glow top-left"></div>
+  <div class="stadium-glow bottom-right"></div>
+  <div class="stadium-grid-overlay"></div>
+
+  <div class="app-layout">
+    <!-- Header Navigation -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="brand-badge">
+          <div class="brand-icon-wrapper">
+            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+              <path d="M2 12h20"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1 class="brand-title">SPORTIX <span class="accent-text">AI</span></h1>
+            <span class="brand-tagline">Petascale Sports Domain Intelligence</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="guardrail-pill" title="This model will abstain from answering non-sports queries">
+          <span class="pulse-dot"></span>
+          <span class="guardrail-label">Strict Sports Domain Guardrail Active</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="model-picker-container">
+          <label for="modelSelect" class="sr-only">Model</label>
+          <select id="modelSelect" class="custom-select">
+            <option value="gpt-4o-mini" selected>gpt-4o-mini (Fast)</option>
+            <option value="gpt-4o">gpt-4o (Omni)</option>
+            <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+          </select>
+        </div>
+
+        <button id="apiKeyBtn" class="btn-icon" title="Configure API Key">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 2l-2 2m-1.5 6.1L17.5 10l-1.4-1.4 1.4-1.4-2.8-2.8-5.7 5.7a5 5 0 1 0 7.1 7.1l5.7-5.7-1.8-1.8z"></path>
+          </svg>
+        </button>
+
+        <button id="clearChatBtn" class="btn-icon" title="Clear Conversation">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Chat Workspace -->
+    <main class="chat-workspace">
+      <div id="chatContainer" class="chat-container">
+        <!-- Welcome Hero State -->
+        <div id="welcomeHero" class="welcome-hero">
+          <div class="hero-trophy">🏆</div>
+          <h2 class="hero-title">The Complete Sports Knowledge Arena</h2>
+          <p class="hero-subtitle">
+            Ask anything across football, cricket, basketball, Formula 1, tennis, athletics, or Olympic records. Non-sports questions are strictly rejected.
+          </p>
+
+          <div class="sports-tags-row">
+            <span class="sport-tag">⚽ Football</span>
+            <span class="sport-tag">🏏 Cricket</span>
+            <span class="sport-tag">🏀 Basketball</span>
+            <span class="sport-tag">🏎️ Formula 1</span>
+            <span class="sport-tag">🎾 Tennis</span>
+            <span class="sport-tag">🥊 Combat Sports</span>
+            <span class="sport-tag">🏊 Athletics</span>
+          </div>
+
+          <div class="prompt-suggestions">
+            <div class="suggestion-header">
+              <span>⚡ Try Quick Inquiries:</span>
+            </div>
+            <div class="suggestions-grid">
+              <button class="prompt-chip" data-prompt="Who won the 2022 FIFA World Cup and what was the final score?">
+                <span class="chip-icon">⚽</span>
+                <span class="chip-text">2022 FIFA World Cup Final details</span>
+              </button>
+              <button class="prompt-chip" data-prompt="Who holds the record for the fastest century in ODI cricket?">
+                <span class="chip-icon">🏏</span>
+                <span class="chip-text">Fastest ODI cricket century</span>
+              </button>
+              <button class="prompt-chip" data-prompt="Explain the 24-second shot clock and offensive foul rules in NBA basketball.">
+                <span class="chip-icon">🏀</span>
+                <span class="chip-text">NBA 24-second shot clock rules</span>
+              </button>
+              <button class="prompt-chip" data-prompt="How does the DRS (Drag Reduction System) work in Formula 1 racing?">
+                <span class="chip-icon">🏎️</span>
+                <span class="chip-text">F1 Drag Reduction System (DRS)</span>
+              </button>
+              <button class="prompt-chip reject-chip" data-prompt="Can you write a Python script for web scraping?">
+                <span class="chip-icon">🚫</span>
+                <span class="chip-text">Test Domain Rejection (Coding Question)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Messages Stream -->
+        <div id="messagesList" class="messages-list"></div>
+
+        <!-- Typing Indicator -->
+        <div id="typingIndicator" class="typing-indicator-wrapper hidden">
+          <div class="message-avatar bot-avatar">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+              <path d="M2 12h20"></path>
+            </svg>
+          </div>
+          <div class="typing-card">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Bottom Input Bar -->
+      <footer class="input-dock">
+        <form id="chatForm" class="chat-form">
+          <div class="input-card">
+            <textarea
+              id="chatInput"
+              rows="1"
+              placeholder="Ask any sports question (e.g. records, rules, match history, athletes)..."
+              autocomplete="off"
+            ></textarea>
+            <button type="submit" id="sendBtn" class="send-btn" title="Send message (Enter)">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+          <div class="input-hints">
+            <span>Press <kbd>Enter</kbd> to send, <kbd>Shift + Enter</kbd> for line break</span>
+            <span class="disclaimer">Exclusively dedicated to sports inquiries</span>
+          </div>
+        </form>
+      </footer>
+    </main>
+  </div>
+
+  <!-- API Key Modal -->
+  <div id="apiKeyModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">OpenAI API Configuration</h3>
+        <button id="closeModalBtn" class="btn-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">
+          Your API key is securely used to contact OpenAI. A default key is pre-configured on the backend, or you can provide your own.
+        </p>
+        <div class="form-group">
+          <label for="customApiKey">Custom API Key</label>
+          <input
+            type="password"
+            id="customApiKey"
+            class="custom-input"
+            placeholder="sk-proj-..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveApiKeyBtn" class="btn-primary">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

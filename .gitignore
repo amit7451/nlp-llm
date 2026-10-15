@@ -2,7 +2,10 @@
 # Multi-Lab Python & NLP/LLM Ignore Rules
 # =========================================================
 
-# Virtual Environments (Root and all sub-lab folders)
+# Virtual Environments & Secrets (Root and all sub-lab folders)
+.env
+.env.*
+*.env
 .venv/
 */.venv/
 **/.venv/

@@ -31,3 +31,9 @@ notebook>=7.0.0
 torch>=2.0.0
 transformers>=4.35.0
 accelerate>=0.25.0
+
+# LLM APIs & Web UI (Lab 5+)
+openai>=1.0.0
+fastapi>=0.100.0
+uvicorn>=0.20.0
+python-dotenv>=1.0.0
