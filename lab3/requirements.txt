@@ -1,0 +1,11 @@
+# =========================================================
+# Lab 3 Requirements Reference
+# (Note: All project labs share the root requirements.txt)
+# =========================================================
+
+-r ../requirements.txt
+
+# Deep Learning & Transformers
+torch>=2.0.0
+transformers>=4.35.0
+accelerate>=0.25.0

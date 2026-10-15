@@ -127,9 +127,17 @@ A single shared Jupyter kernel (**`Python (NLP-LLM)`**) is registered globally, 
 
 ---
 
-### 📖 [Lab 3: Pretraining & Causal Language Modeling](./lab3)
-- **Status**: 🚧 *Upcoming*
-- **Focus Areas**: Building a custom GPT-style decoder, training dataset pipelines, tokenized chunk collation, next-token cross-entropy loss, KV cache acceleration, top-$k$ / top-$p$ (nucleus) sampling.
+### 📖 [Lab 3: Transformer Fine-Tuning & Sentiment Analysis with DistilBERT](./lab3)
+- **Status**: ✅ **Complete & Verified**
+- **Core Topics**:
+  1. **Knowledge Distillation & Model Architecture**: Student-Teacher architecture, DistilBERT vs BERT parameter reduction (66M vs 110M), 6-layer Transformer encoder, hidden representation geometry.
+  2. **Data Cleansing & Sentiment Normalization**: `Twitter_Data.csv` auditing, missing value sanitization, 0-indexed label transformation (-1 Negative, 0 Neutral, 1 Positive), stratified subsampling controls.
+  3. **Subword Tokenization Pipeline**: Fast WordPiece tokenization (`distilbert-base-uncased`), special tokens (`[CLS]`, `[SEP]`, `[PAD]`), attention masks, and dynamic padding collation with `DataCollatorWithPadding`.
+  4. **Transfer Learning via Hugging Face Trainer**: Stratified 80/10/10 train-val-test split, AdamW optimizer with linear warmup, mixed-precision FP16 GPU acceleration, best checkpoint selection based on validation Macro F1.
+  5. **Quantitative Model Evaluation**: Test set benchmarking, per-class precision/recall/F1 via `classification_report`, raw and normalized confusion matrix heatmaps (`seaborn` / `matplotlib`).
+  6. **Serialization & Production Inference**: Model/tokenizer checkpoint export, high-level Hugging Face `pipeline` deployment, and interactive real-time prediction with softmax class probabilities.
+- **Notebooks**: [`lab3/lab3.ipynb`](./lab3/lab3.ipynb) (Comprehensive) | [`lab3/lab31.ipynb`](./lab3/lab31.ipynb) (Code-only)
+- **Guide**: [`lab3/README.md`](./lab3/README.md)
 
 ---
 
